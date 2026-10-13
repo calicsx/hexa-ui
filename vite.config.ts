@@ -10,12 +10,13 @@ export default defineConfig({
                 index: "src/index.ts",
                 button: "src/components/button/index.ts",
                 input: "src/components/input/index.ts",
+                icon: "src/components/icon/index.ts",
             },
             formats: ["es"],
             fileName: (_format, name) => `${name}.js`,
         },
         rollupOptions: {
-            external: [/^lit(\/.*)?$/],
+            external: [/^lit(\/.*)?$/, /^lucide(\/.*)?$/],
         },
     },
 });

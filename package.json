@@ -22,6 +22,10 @@
         "./input": {
             "types": "./dist/components/input/index.d.ts",
             "import": "./dist/input.js"
+        },
+        "./icon": {
+            "types": "./dist/components/icon/index.d.ts",
+            "import": "./dist/icon.js"
         }
     },
     "scripts": {
@@ -32,7 +36,8 @@
         "format:check": "prettier --check ."
     },
     "dependencies": {
-        "lit": "^3.3.3"
+        "lit": "^3.3.3",
+        "lucide": "^1.55.0"
     },
     "devDependencies": {
         "@tailwindcss/vite": "^4.3.3",
