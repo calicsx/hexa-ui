@@ -22,6 +22,12 @@ const sizes: Record<HxButtonSize, string> = {
     lg: "h-11 px-6 text-base",
 };
 
+const squareSizes: Record<HxButtonSize, string> = {
+    sm: "size-8 text-xs",
+    md: "size-9 text-sm",
+    lg: "size-11 text-base",
+};
+
 /**
  * @element hx-button
  * @slot - The button label (text, icon…).
@@ -44,6 +50,7 @@ export class HxButton extends HxElement {
     @property({ reflect: true }) size: HxButtonSize = "md";
     @property() type: "button" | "submit" | "reset" = "button";
     @property({ type: Boolean, reflect: true }) disabled = false;
+    @property({ type: Boolean, reflect: true }) square = false;
 
     private internals = this.attachInternals();
 
@@ -59,7 +66,7 @@ export class HxButton extends HxElement {
     override render() {
         return html`<button
             part="base"
-            class="${base} ${variants[this.variant]} ${sizes[this.size]}"
+            class="${base} ${variants[this.variant]} ${(this.square ? squareSizes : sizes)[this.size]}"
             type="button"
             ?disabled=${this.disabled}
         >
