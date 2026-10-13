@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Hexa UI</title>
+        <link rel="stylesheet" href="/tokens.css" />
+        <link rel="stylesheet" href="/demo.css" />
+    </head>
+    <body class="bg-background text-foreground mx-auto my-12 max-w-lg px-4 font-sans">
+        <div class="mb-6 flex gap-3">
+            <hx-button variant="outline" size="sm" onclick="document.documentElement.classList.toggle('dark')">
+                Dark / Light
+            </hx-button>
+        </div>
+
+        <section class="mb-8">
+            <h2 class="text-muted-foreground mb-3 text-sm font-semibold tracking-wide uppercase">Button</h2>
+            <div class="flex flex-wrap gap-3">
+                <hx-button>Primary</hx-button>
+                <hx-button variant="secondary">Secondary</hx-button>
+                <hx-button variant="outline">Outline</hx-button>
+                <hx-button variant="ghost">Ghost</hx-button>
+                <hx-button variant="destructive">Delete</hx-button>
+            </div>
+            <div class="mt-3 flex flex-wrap items-center gap-3">
+                <hx-button size="sm">Small</hx-button>
+                <hx-button size="md">Medium</hx-button>
+                <hx-button size="lg">Large</hx-button>
+            </div>
+        </section>
+
+        <section class="mb-8">
+            <h2 class="text-muted-foreground mb-3 text-sm font-semibold tracking-wide uppercase">Input</h2>
+            <form
+                class="flex flex-col gap-3"
+                onsubmit="
+                    event.preventDefault();
+                    alert(JSON.stringify(Object.fromEntries(new FormData(this))));
+                "
+            >
+                <hx-input
+                    name="login"
+                    type="login"
+                    label="Login"
+                    error="This login is already used."
+                    required
+                ></hx-input>
+                <hx-input name="password" label="Password" hint="Should not be disclosed."></hx-input>
+                <hx-button type="submit">Submit</hx-button>
+            </form>
+        </section>
+
+        <script type="module" src="/src/index.ts"></script>
+    </body>
+</html>

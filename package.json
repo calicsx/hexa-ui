@@ -1,0 +1,46 @@
+{
+    "name": "hexa-ui",
+    "version": "0.1.0",
+    "type": "module",
+    "license": "MIT",
+    "files": [
+        "dist",
+        "tokens.css"
+    ],
+    "main": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "exports": {
+        ".": {
+            "types": "./dist/index.d.ts",
+            "import": "./dist/index.js"
+        },
+        "./button": {
+            "types": "./dist/components/button/index.d.ts",
+            "import": "./dist/button.js"
+        },
+        "./tokens.css": "./tokens.css",
+        "./input": {
+            "types": "./dist/components/input/index.d.ts",
+            "import": "./dist/input.js"
+        }
+    },
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build && tsc --noEmit false --emitDeclarationOnly --declaration --outDir dist",
+        "typecheck": "tsc",
+        "format": "prettier --write .",
+        "format:check": "prettier --check ."
+    },
+    "dependencies": {
+        "lit": "^3.3.3"
+    },
+    "devDependencies": {
+        "@tailwindcss/vite": "^4.3.3",
+        "prettier": "^3.9.10",
+        "prettier-plugin-tailwindcss": "^0.8.1",
+        "tailwindcss": "^4.3.3",
+        "typescript": "^7.0.2",
+        "vite": "^8.3.4"
+    },
+    "packageManager": "pnpm@12.11.2+sha512.25a51652a196785af5f28bda6dfe8dc582ebefa4ac1d180221ce1390231c5fb76637822ea4b6e4633ce74acdcb0a77f725af11bad38177fdeddaee818a955cb9"
+}

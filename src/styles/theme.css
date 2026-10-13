@@ -1,0 +1,25 @@
+@theme inline {
+    --color-background: var(--hx-background);
+    --color-foreground: var(--hx-foreground);
+    --color-card: var(--hx-card);
+    --color-card-foreground: var(--hx-card-foreground);
+    --color-popover: var(--hx-popover);
+    --color-popover-foreground: var(--hx-popover-foreground);
+    --color-primary: var(--hx-primary);
+    --color-primary-foreground: var(--hx-primary-foreground);
+    --color-secondary: var(--hx-secondary);
+    --color-secondary-foreground: var(--hx-secondary-foreground);
+    --color-muted: var(--hx-muted);
+    --color-muted-foreground: var(--hx-muted-foreground);
+    --color-accent: var(--hx-accent);
+    --color-accent-foreground: var(--hx-accent-foreground);
+    --color-destructive: var(--hx-destructive);
+    --color-border: var(--hx-border);
+    --color-input: var(--hx-input);
+    --color-ring: var(--hx-ring);
+
+    --radius-sm: calc(var(--hx-radius) - 4px);
+    --radius-md: calc(var(--hx-radius) - 2px);
+    --radius-lg: var(--hx-radius);
+    --radius-xl: calc(var(--hx-radius) + 4px);
+}
