@@ -16,6 +16,8 @@ export default defineConfig({
                 textarea: "src/components/textarea/index.ts",
                 checkbox: "src/components/checkbox/index.ts",
                 switch: "src/components/switch/index.ts",
+                badge: "src/components/badge/index.ts",
+                card: "src/components/card/index.ts",
             },
             formats: ["es"],
             fileName: (_format, name) => `${name}.js`,

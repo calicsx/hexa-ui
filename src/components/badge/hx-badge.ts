@@ -1,0 +1,69 @@
+import { css, html, nothing } from "lit";
+import { customElement, property } from "lit/decorators.js";
+import type { IconNode } from "lucide";
+import { HxElement } from "../../hx-element.js";
+import "../icon/hx-icon.js";
+
+export type HxBadgeVariant = "primary" | "secondary" | "outline" | "destructive";
+export type HxBadgeSize = "sm" | "md" | "lg";
+export type HxBadgeIconPlacement = "left" | "right";
+
+const variants: Record<HxBadgeVariant, string> = {
+    primary: "border-transparent bg-primary text-primary-foreground",
+    secondary: "border-transparent bg-secondary text-secondary-foreground",
+    outline: "border-border text-foreground",
+    destructive: "border-transparent bg-destructive text-white",
+};
+
+const sizes: Record<HxBadgeSize, string> = {
+    sm: "px-1.5 py-px text-[0.625rem]",
+    md: "px-2 py-0.5 text-xs",
+    lg: "px-2.5 py-1 text-sm",
+};
+
+const iconSizes: Record<HxBadgeSize, number> = { sm: 10, md: 12, lg: 14 };
+
+/**
+ * @element hx-badge
+ * @slot - The badge content (text, icon…).
+ * @csspart base - The inner wrapper.
+ * @csspart icon - The `hx-icon` rendered from the `icon` property.
+ */
+@customElement("hx-badge")
+export class HxBadge extends HxElement {
+    static override styles = [
+        HxElement.styles,
+        css`
+            :host {
+                display: inline-flex;
+            }
+        `,
+    ];
+
+    @property({ reflect: true }) variant: HxBadgeVariant = "primary";
+    @property({ reflect: true }) size: HxBadgeSize = "md";
+    @property({ attribute: false }) icon?: IconNode;
+    @property({ attribute: "icon-placement", reflect: true }) iconPlacement: HxBadgeIconPlacement = "left";
+
+    override render() {
+        const icon = this.icon
+            ? html`<hx-icon part="icon" .icon=${this.icon} size=${iconSizes[this.size]}></hx-icon>`
+            : nothing;
+        return html`<span
+            part="base"
+            class="${variants[this.variant]} ${
+                sizes[this.size]
+            } inline-flex shrink-0 items-center justify-center gap-1 rounded-full border font-medium whitespace-nowrap"
+        >
+            ${this.iconPlacement === "left" ? icon : nothing}<slot></slot>${
+                this.iconPlacement === "right" ? icon : nothing
+            }
+        </span>`;
+    }
+}
+
+declare global {
+    interface HTMLElementTagNameMap {
+        "hx-badge": HxBadge;
+    }
+}

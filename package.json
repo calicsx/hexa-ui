@@ -46,6 +46,14 @@
         "./switch": {
             "types": "./dist/components/switch/index.d.ts",
             "import": "./dist/switch.js"
+        },
+        "./badge": {
+            "types": "./dist/components/badge/index.d.ts",
+            "import": "./dist/badge.js"
+        },
+        "./card": {
+            "types": "./dist/components/card/index.d.ts",
+            "import": "./dist/card.js"
         }
     },
     "scripts": {

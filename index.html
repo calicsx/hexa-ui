@@ -49,6 +49,26 @@
         </section>
 
         <section class="mb-8">
+            <h2 class="text-muted-foreground mb-3 text-sm font-semibold tracking-wide uppercase">Badge</h2>
+            <div class="flex flex-wrap items-center gap-3">
+                <hx-badge>Primary</hx-badge>
+                <hx-badge variant="secondary">Secondary</hx-badge>
+                <hx-badge variant="outline">Outline</hx-badge>
+                <hx-badge variant="destructive">Destructive</hx-badge>
+            </div>
+            <div class="mt-3 flex flex-wrap items-center gap-3">
+                <hx-badge size="sm">Small</hx-badge>
+                <hx-badge size="md">Medium</hx-badge>
+                <hx-badge size="lg">Large</hx-badge>
+            </div>
+            <div class="mt-3 flex flex-wrap items-center gap-3">
+                <hx-badge data-icon="Heart">Favorite</hx-badge>
+                <hx-badge variant="outline" data-icon="Settings">Settings</hx-badge>
+                <hx-badge variant="destructive" data-icon="CircleAlert" icon-placement="right">Error</hx-badge>
+            </div>
+        </section>
+
+        <section class="mb-8">
             <h2 class="text-muted-foreground mb-3 text-sm font-semibold tracking-wide uppercase">Input</h2>
             <div class="flex flex-col gap-3">
                 <hx-input label="Email" type="email" placeholder="you@example.com"></hx-input>
@@ -92,12 +112,41 @@
             </div>
         </section>
 
+        <section class="mb-8">
+            <h2 class="text-muted-foreground mb-3 text-sm font-semibold tracking-wide uppercase">Card</h2>
+            <div class="flex flex-col gap-4">
+                <hx-card>
+                    <span slot="title">Create project</span>
+                    <span slot="description">Create a new project in one click.</span>
+                    <hx-badge slot="action" variant="secondary">New</hx-badge>
+                    <hx-input label="Name"></hx-input>
+                    <hx-button slot="footer" variant="outline">Create</hx-button>
+                </hx-card>
+                <hx-card>
+                    <div slot="header" class="flex items-center gap-3">
+                        <div class="bg-muted flex size-10 items-center justify-center rounded-full">
+                            <hx-icon data-icon="Settings" size="20"></hx-icon>
+                        </div>
+                        <div>
+                            <div class="font-semibold">Custom header</div>
+                            <div class="text-muted-foreground text-sm">Any content in the header slot.</div>
+                        </div>
+                    </div>
+                    The header slot replaces the title, description and action layout.
+                </hx-card>
+                <hx-card>Default card with content only.</hx-card>
+                <hx-card variant="outline">Outline card with content only.</hx-card>
+                <hx-card variant="ghost">Ghost card with content only.</hx-card>
+            </div>
+        </section>
+
         <script type="module" src="/src/index.ts"></script>
         <script type="module">
             // Demo only: in an app, import each icon and bind it with `.icon=${Search}`.
+            // `[data-icon]` covers every component with an `icon` property (hx-icon, hx-badge…).
             import { CircleAlert, Download, Heart, Plus, Search, Settings, Trash2 } from "lucide";
             const icons = { CircleAlert, Download, Heart, Plus, Search, Settings, Trash2 };
-            for (const el of document.querySelectorAll("hx-icon[data-icon]")) el.icon = icons[el.dataset.icon];
+            for (const el of document.querySelectorAll("[data-icon]")) el.icon = icons[el.dataset.icon];
         </script>
     </body>
 </html>
