@@ -11,6 +11,7 @@ export default defineConfig({
                 button: "src/components/button/index.ts",
                 input: "src/components/input/index.ts",
                 icon: "src/components/icon/index.ts",
+                "color-mode-button": "src/components/color-mode-button/index.ts",
             },
             formats: ["es"],
             fileName: (_format, name) => `${name}.js`,

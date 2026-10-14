@@ -26,6 +26,10 @@
         "./icon": {
             "types": "./dist/components/icon/index.d.ts",
             "import": "./dist/icon.js"
+        },
+        "./color-mode-button": {
+            "types": "./dist/components/color-mode-button/index.d.ts",
+            "import": "./dist/color-mode-button.js"
         }
     },
     "scripts": {
