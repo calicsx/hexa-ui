@@ -3,3 +3,7 @@ export * from "./components/button/index.js";
 export * from "./components/input/index.js";
 export * from "./components/icon/index.js";
 export * from "./components/color-mode-button/index.js";
+export * from "./components/label/index.js";
+export * from "./components/textarea/index.js";
+export * from "./components/checkbox/index.js";
+export * from "./components/switch/index.js";

@@ -30,6 +30,22 @@
         "./color-mode-button": {
             "types": "./dist/components/color-mode-button/index.d.ts",
             "import": "./dist/color-mode-button.js"
+        },
+        "./label": {
+            "types": "./dist/components/label/index.d.ts",
+            "import": "./dist/label.js"
+        },
+        "./textarea": {
+            "types": "./dist/components/textarea/index.d.ts",
+            "import": "./dist/textarea.js"
+        },
+        "./checkbox": {
+            "types": "./dist/components/checkbox/index.d.ts",
+            "import": "./dist/checkbox.js"
+        },
+        "./switch": {
+            "types": "./dist/components/switch/index.d.ts",
+            "import": "./dist/switch.js"
         }
     },
     "scripts": {

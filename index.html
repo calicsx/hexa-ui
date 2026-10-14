@@ -13,6 +13,16 @@
         </div>
 
         <section class="mb-8">
+            <h2 class="text-muted-foreground mb-3 text-sm font-semibold tracking-wide uppercase">Icon</h2>
+            <div class="flex flex-wrap items-center gap-4">
+                <hx-icon data-icon="Search"></hx-icon>
+                <hx-icon data-icon="Heart" size="20"></hx-icon>
+                <hx-icon data-icon="Settings" size="24" stroke-width="1.5"></hx-icon>
+                <hx-icon data-icon="CircleAlert" size="24" class="text-destructive"></hx-icon>
+            </div>
+        </section>
+
+        <section class="mb-8">
             <h2 class="text-muted-foreground mb-3 text-sm font-semibold tracking-wide uppercase">Button</h2>
             <div class="flex flex-wrap gap-3">
                 <hx-button>Primary</hx-button>
@@ -39,34 +49,47 @@
         </section>
 
         <section class="mb-8">
-            <h2 class="text-muted-foreground mb-3 text-sm font-semibold tracking-wide uppercase">Icon</h2>
-            <div class="flex flex-wrap items-center gap-4">
-                <hx-icon data-icon="Search"></hx-icon>
-                <hx-icon data-icon="Heart" size="20"></hx-icon>
-                <hx-icon data-icon="Settings" size="24" stroke-width="1.5"></hx-icon>
-                <hx-icon data-icon="CircleAlert" size="24" class="text-destructive"></hx-icon>
+            <h2 class="text-muted-foreground mb-3 text-sm font-semibold tracking-wide uppercase">Input</h2>
+            <div class="flex flex-col gap-3">
+                <hx-input label="Email" type="email" placeholder="you@example.com"></hx-input>
+                <hx-input label="Password" type="password" hint="Should not be disclosed."></hx-input>
+                <hx-input label="Login" value="admin" error="This login is already used." required></hx-input>
+                <hx-input label="Disabled" disabled></hx-input>
             </div>
         </section>
 
         <section class="mb-8">
-            <h2 class="text-muted-foreground mb-3 text-sm font-semibold tracking-wide uppercase">Input</h2>
-            <form
-                class="flex flex-col gap-3"
-                onsubmit="
-                    event.preventDefault();
-                    alert(JSON.stringify(Object.fromEntries(new FormData(this))));
-                "
-            >
-                <hx-input
-                    name="login"
-                    type="login"
-                    label="Login"
-                    error="This login is already used."
-                    required
-                ></hx-input>
-                <hx-input name="password" label="Password" hint="Should not be disclosed."></hx-input>
-                <hx-button type="submit">Submit</hx-button>
-            </form>
+            <h2 class="text-muted-foreground mb-3 text-sm font-semibold tracking-wide uppercase">Textarea</h2>
+            <div class="flex flex-col gap-3">
+                <hx-textarea label="Bio" placeholder="Tell us about yourself" hint="Max 500 characters."></hx-textarea>
+                <hx-textarea label="Comment" error="This field is required." required></hx-textarea>
+                <hx-textarea label="Disabled" disabled></hx-textarea>
+            </div>
+        </section>
+
+        <section class="mb-8">
+            <h2 class="text-muted-foreground mb-3 text-sm font-semibold tracking-wide uppercase">Checkbox</h2>
+            <div class="flex flex-col gap-3">
+                <hx-checkbox>Default</hx-checkbox>
+                <hx-checkbox checked>Checked</hx-checkbox>
+                <hx-checkbox indeterminate>Indeterminate</hx-checkbox>
+                <hx-checkbox disabled>Disabled</hx-checkbox>
+                <hx-checkbox checked disabled>Checked and disabled</hx-checkbox>
+            </div>
+        </section>
+
+        <section class="mb-8">
+            <h2 class="text-muted-foreground mb-3 text-sm font-semibold tracking-wide uppercase">Switch</h2>
+            <div class="flex flex-col gap-3">
+                <hx-switch>Default</hx-switch>
+                <hx-switch checked>Checked</hx-switch>
+                <hx-switch disabled>Disabled</hx-switch>
+            </div>
+            <div class="mt-3 flex flex-wrap items-center gap-4">
+                <hx-switch size="sm">Small</hx-switch>
+                <hx-switch>Medium</hx-switch>
+                <hx-switch size="lg">Large</hx-switch>
+            </div>
         </section>
 
         <script type="module" src="/src/index.ts"></script>
