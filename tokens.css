@@ -40,3 +40,13 @@
     --hx-input: oklch(1 0 0 / 15%);
     --hx-ring: oklch(0.556 0 0);
 }
+
+@layer base {
+    hx-separator {
+        margin-block: 1rem;
+    }
+    hx-separator[direction="vertical"] {
+        margin-block: 0;
+        margin-inline: 1rem;
+    }
+}

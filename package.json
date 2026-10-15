@@ -62,6 +62,10 @@
         "./tabs": {
             "types": "./dist/components/tabs/index.d.ts",
             "import": "./dist/tabs.js"
+        },
+        "./separator": {
+            "types": "./dist/components/separator/index.d.ts",
+            "import": "./dist/separator.js"
         }
     },
     "scripts": {

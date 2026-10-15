@@ -11,3 +11,4 @@ export * from "./components/badge/index.js";
 export * from "./components/card/index.js";
 export * from "./components/skeleton/index.js";
 export * from "./components/tabs/index.js";
+export * from "./components/separator/index.js";

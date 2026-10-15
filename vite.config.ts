@@ -20,6 +20,7 @@ export default defineConfig({
                 card: "src/components/card/index.ts",
                 skeleton: "src/components/skeleton/index.ts",
                 tabs: "src/components/tabs/index.ts",
+                separator: "src/components/separator/index.ts",
             },
             formats: ["es"],
             fileName: (_format, name) => `${name}.js`,
