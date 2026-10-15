@@ -141,6 +141,26 @@
         </section>
 
         <section class="mb-8">
+            <h2 class="text-muted-foreground mb-3 text-sm font-semibold tracking-wide uppercase">Tabs</h2>
+            <hx-tabs value="account">
+                <hx-tab value="account">Account</hx-tab>
+                <hx-tab value="password">Password</hx-tab>
+                <hx-tab value="billing" disabled>Billing</hx-tab>
+                <hx-tab-panel value="account">Account</hx-tab-panel>
+                <hx-tab-panel value="password">Password</hx-tab-panel>
+                <hx-tab-panel value="billing">Billing</hx-tab-panel>
+            </hx-tabs>
+            <hx-tabs variant="secondary" value="overview" class="mt-4">
+                <hx-tab value="overview">Overview</hx-tab>
+                <hx-tab value="analytics">Analytics</hx-tab>
+                <hx-tab value="reports" disabled>Reports</hx-tab>
+                <hx-tab-panel value="overview">Overview</hx-tab-panel>
+                <hx-tab-panel value="analytics">Analytics</hx-tab-panel>
+                <hx-tab-panel value="reports">Reports</hx-tab-panel>
+            </hx-tabs>
+        </section>
+
+        <section class="mb-8">
             <h2 class="text-muted-foreground mb-3 text-sm font-semibold tracking-wide uppercase">Skeleton</h2>
             <div class="flex w-full items-center gap-4">
                 <hx-skeleton circle class="size-12"></hx-skeleton>

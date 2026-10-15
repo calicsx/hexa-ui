@@ -19,6 +19,7 @@ export default defineConfig({
                 badge: "src/components/badge/index.ts",
                 card: "src/components/card/index.ts",
                 skeleton: "src/components/skeleton/index.ts",
+                tabs: "src/components/tabs/index.ts",
             },
             formats: ["es"],
             fileName: (_format, name) => `${name}.js`,

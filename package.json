@@ -58,6 +58,10 @@
         "./skeleton": {
             "types": "./dist/components/skeleton/index.d.ts",
             "import": "./dist/skeleton.js"
+        },
+        "./tabs": {
+            "types": "./dist/components/tabs/index.d.ts",
+            "import": "./dist/tabs.js"
         }
     },
     "scripts": {
