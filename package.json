@@ -54,6 +54,10 @@
         "./card": {
             "types": "./dist/components/card/index.d.ts",
             "import": "./dist/card.js"
+        },
+        "./skeleton": {
+            "types": "./dist/components/skeleton/index.d.ts",
+            "import": "./dist/skeleton.js"
         }
     },
     "scripts": {

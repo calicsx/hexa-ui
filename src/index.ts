@@ -9,3 +9,4 @@ export * from "./components/checkbox/index.js";
 export * from "./components/switch/index.js";
 export * from "./components/badge/index.js";
 export * from "./components/card/index.js";
+export * from "./components/skeleton/index.js";
