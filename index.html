@@ -195,6 +195,33 @@
                     <hx-tab-panel value="reports">Reports</hx-tab-panel>
                 </hx-tabs>
             </div>
+
+            <div class="col-span-3 mt-4 flex flex-col gap-4">
+                <hx-tabs value="account">
+                    <hx-tab value="account" data-icon="User">Account</hx-tab>
+                    <hx-tab value="password" data-icon="Lock">Password</hx-tab>
+                    <hx-tab value="billing" data-icon="CreditCard" disabled>Billing</hx-tab>
+                    <hx-tab-panel value="account">Account</hx-tab-panel>
+                    <hx-tab-panel value="password">Password</hx-tab-panel>
+                    <hx-tab-panel value="billing">Billing</hx-tab-panel>
+                </hx-tabs>
+                <hx-tabs value="account">
+                    <hx-tab value="account" data-icon="User" icon-placement="right">Account</hx-tab>
+                    <hx-tab value="password" data-icon="Lock" icon-placement="right">Password</hx-tab>
+                    <hx-tab value="billing" data-icon="CreditCard" icon-placement="right" disabled>Billing</hx-tab>
+                    <hx-tab-panel value="account">Account</hx-tab-panel>
+                    <hx-tab-panel value="password">Password</hx-tab-panel>
+                    <hx-tab-panel value="billing">Billing</hx-tab-panel>
+                </hx-tabs>
+                <hx-tabs variant="secondary" value="overview" direction="vertical">
+                    <hx-tab value="overview" data-icon="House">Overview</hx-tab>
+                    <hx-tab value="analytics" data-icon="ChartLine">Analytics</hx-tab>
+                    <hx-tab value="reports" data-icon="FileText" disabled>Reports</hx-tab>
+                    <hx-tab-panel value="overview">Overview</hx-tab-panel>
+                    <hx-tab-panel value="analytics">Analytics</hx-tab-panel>
+                    <hx-tab-panel value="reports">Reports</hx-tab-panel>
+                </hx-tabs>
+            </div>
         </section>
 
         <hx-separator></hx-separator>
@@ -214,9 +241,37 @@
         <script type="module" src="/src/index.ts"></script>
         <script type="module">
             // Demo only: in an app, import each icon and bind it with `.icon=${Search}`.
-            // `[data-icon]` covers every component with an `icon` property (hx-icon, hx-badge…).
-            import { CircleAlert, Download, Heart, Plus, Search, Settings, Trash2 } from "lucide";
-            const icons = { CircleAlert, Download, Heart, Plus, Search, Settings, Trash2 };
+            // `[data-icon]` covers every component with an `icon` property (hx-icon, hx-badge, hx-tab…).
+            import {
+                ChartLine,
+                CircleAlert,
+                CreditCard,
+                Download,
+                FileText,
+                Heart,
+                House,
+                Lock,
+                Plus,
+                Search,
+                Settings,
+                Trash2,
+                User,
+            } from "lucide";
+            const icons = {
+                ChartLine,
+                CircleAlert,
+                CreditCard,
+                Download,
+                FileText,
+                Heart,
+                House,
+                Lock,
+                Plus,
+                Search,
+                Settings,
+                Trash2,
+                User,
+            };
             for (const el of document.querySelectorAll("[data-icon]")) el.icon = icons[el.dataset.icon];
         </script>
     </body>

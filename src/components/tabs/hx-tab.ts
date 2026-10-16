@@ -1,6 +1,10 @@
-import { css, html } from "lit";
+import { css, html, nothing } from "lit";
 import { customElement, property } from "lit/decorators.js";
+import type { IconNode } from "lucide";
 import { HxElement } from "../../hx-element.js";
+import "../icon/hx-icon.js";
+
+export type HxTabIconPlacement = "left" | "right";
 import type { HxTabsDirection, HxTabsVariant } from "./hx-tabs.js";
 
 const variants: Record<HxTabsVariant, { selected: string; idle: string } & Record<HxTabsDirection, string>> = {
@@ -22,6 +26,7 @@ const variants: Record<HxTabsVariant, { selected: string; idle: string } & Recor
  * @element hx-tab
  * @slot - The tab label (text, icon…).
  * @csspart base - The tab wrapper.
+ * @csspart icon - The `hx-icon` rendered from the `icon` property.
  */
 @customElement("hx-tab")
 export class HxTab extends HxElement {
@@ -47,6 +52,8 @@ export class HxTab extends HxElement {
     @property({ type: Boolean, reflect: true }) disabled = false;
     @property({ reflect: true }) variant: HxTabsVariant = "default";
     @property({ reflect: true }) direction: HxTabsDirection = "horizontal";
+    @property({ attribute: false }) icon?: IconNode;
+    @property({ attribute: "icon-placement", reflect: true }) iconPlacement: HxTabIconPlacement = "left";
 
     private internals = this.attachInternals();
 
@@ -67,13 +74,16 @@ export class HxTab extends HxElement {
 
     override render() {
         const variant = variants[this.variant];
+        const icon = this.icon ? html`<hx-icon part="icon" .icon=${this.icon}></hx-icon>` : nothing;
         return html`<div
             part="base"
             class="${variant[this.direction]} ${
                 this.selected ? variant.selected : variant.idle
             } inline-flex flex-1 cursor-pointer items-center gap-1.5 text-sm font-medium whitespace-nowrap transition-[color,box-shadow]"
         >
-            <slot></slot>
+            ${this.iconPlacement === "left" ? icon : nothing}<slot></slot>${
+                this.iconPlacement === "right" ? icon : nothing
+            }
         </div>`;
     }
 }
