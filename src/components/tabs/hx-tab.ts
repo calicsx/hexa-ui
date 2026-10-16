@@ -1,16 +1,18 @@
 import { css, html } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import { HxElement } from "../../hx-element.js";
-import type { HxTabsVariant } from "./hx-tabs.js";
+import type { HxTabsDirection, HxTabsVariant } from "./hx-tabs.js";
 
-const variants: Record<HxTabsVariant, { base: string; selected: string; idle: string }> = {
+const variants: Record<HxTabsVariant, { selected: string; idle: string } & Record<HxTabsDirection, string>> = {
     default: {
-        base: "rounded-md border border-transparent px-2 py-1",
+        horizontal: "justify-center rounded-md border border-transparent px-2 py-1",
+        vertical: "justify-start rounded-md border border-transparent px-2 py-1",
         selected: "bg-background text-foreground shadow-sm",
         idle: "hover:text-foreground",
     },
     secondary: {
-        base: "-mb-px border-b-2 px-3 py-2",
+        horizontal: "justify-center -mb-px border-b-2 px-3 py-2",
+        vertical: "justify-start -ml-px border-l-2 px-3 py-2",
         selected: "border-primary text-foreground",
         idle: "border-transparent text-muted-foreground hover:text-foreground",
     },
@@ -44,6 +46,7 @@ export class HxTab extends HxElement {
     @property({ type: Boolean, reflect: true }) selected = false;
     @property({ type: Boolean, reflect: true }) disabled = false;
     @property({ reflect: true }) variant: HxTabsVariant = "default";
+    @property({ reflect: true }) direction: HxTabsDirection = "horizontal";
 
     private internals = this.attachInternals();
 
@@ -66,9 +69,9 @@ export class HxTab extends HxElement {
         const variant = variants[this.variant];
         return html`<div
             part="base"
-            class="${variant.base} ${
+            class="${variant[this.direction]} ${
                 this.selected ? variant.selected : variant.idle
-            } inline-flex flex-1 cursor-pointer items-center justify-center gap-1.5 text-sm font-medium whitespace-nowrap transition-[color,box-shadow]"
+            } inline-flex flex-1 cursor-pointer items-center gap-1.5 text-sm font-medium whitespace-nowrap transition-[color,box-shadow]"
         >
             <slot></slot>
         </div>`;

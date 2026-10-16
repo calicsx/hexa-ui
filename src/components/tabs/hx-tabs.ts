@@ -7,10 +7,22 @@ import "./hx-tab-panel.js";
 import "./hx-tab.js";
 
 export type HxTabsVariant = "default" | "secondary";
+export type HxTabsDirection = "horizontal" | "vertical";
 
-const variants: Record<HxTabsVariant, string> = {
-    default: "h-9 rounded-lg bg-muted p-[3px] text-muted-foreground",
-    secondary: "border-b border-border",
+const variants: Record<HxTabsVariant, Record<HxTabsDirection, string>> = {
+    default: {
+        horizontal: "h-9 rounded-lg bg-muted p-[3px] text-muted-foreground",
+        vertical: "rounded-lg bg-muted p-[3px] text-muted-foreground",
+    },
+    secondary: {
+        horizontal: "border-b border-border",
+        vertical: "border-l border-border",
+    },
+};
+
+const directions: Record<HxTabsDirection, { nav: string; body: string }> = {
+    horizontal: { nav: "auto-cols-fr grid-flow-col", body: "mt-2" },
+    vertical: { nav: "auto-rows-fr grid-flow-row", body: "ml-4 min-w-0 flex-1" },
 };
 
 /**
@@ -28,11 +40,16 @@ export class HxTabs extends HxElement {
             :host {
                 display: block;
             }
+            :host([direction="vertical"]) {
+                display: flex;
+                align-items: flex-start;
+            }
         `,
     ];
 
     @property() value = "";
     @property({ reflect: true }) variant: HxTabsVariant = "default";
+    @property({ reflect: true }) direction: HxTabsDirection = "horizontal";
 
     constructor() {
         super();
@@ -75,9 +92,11 @@ export class HxTabs extends HxElement {
         const enabled = this.tabs.filter((t) => !t.disabled);
         const index = enabled.indexOf(tab);
         const last = enabled.length - 1;
+        const [nextKey, previousKey] =
+            this.direction === "vertical" ? ["ArrowDown", "ArrowUp"] : ["ArrowRight", "ArrowLeft"];
         const next: HxTab | undefined = {
-            ArrowRight: enabled[index === last ? 0 : index + 1],
-            ArrowLeft: enabled[index === 0 ? last : index - 1],
+            [nextKey]: enabled[index === last ? 0 : index + 1],
+            [previousKey]: enabled[index === 0 ? last : index - 1],
             Home: enabled[0],
             End: enabled[last],
         }[event.key];
@@ -94,6 +113,7 @@ export class HxTabs extends HxElement {
             const panel = panels.find((p) => p.value === tab.value);
             tab.selected = tab.value === value;
             tab.variant = this.variant;
+            tab.direction = this.direction;
             tab.tabIndex = tab.selected ? 0 : -1;
             tab.ariaControlsElements = panel ? [panel] : null;
             if (panel) panel.ariaLabelledByElements = [tab];
@@ -106,14 +126,16 @@ export class HxTabs extends HxElement {
     }
 
     override render() {
+        const direction = directions[this.direction];
         return html`<div
                 part="nav"
                 role="tablist"
-                class="${variants[this.variant]} inline-grid auto-cols-fr grid-flow-col"
+                aria-orientation=${this.direction}
+                class="${variants[this.variant][this.direction]} ${direction.nav} inline-grid"
             >
                 <slot name="nav" @slotchange=${this.sync}></slot>
             </div>
-            <div part="body" class="mt-2"><slot @slotchange=${this.sync}></slot></div>`;
+            <div part="body" class=${direction.body}><slot @slotchange=${this.sync}></slot></div>`;
     }
 }
 

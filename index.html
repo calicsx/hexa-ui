@@ -158,22 +158,43 @@
 
         <section>
             <h2 class="text-muted-foreground mb-3 text-sm font-semibold tracking-wide uppercase">Tabs</h2>
-            <hx-tabs value="account">
-                <hx-tab value="account">Account</hx-tab>
-                <hx-tab value="password">Password</hx-tab>
-                <hx-tab value="billing" disabled>Billing</hx-tab>
-                <hx-tab-panel value="account">Account</hx-tab-panel>
-                <hx-tab-panel value="password">Password</hx-tab-panel>
-                <hx-tab-panel value="billing">Billing</hx-tab-panel>
-            </hx-tabs>
-            <hx-tabs variant="secondary" value="overview" class="mt-4">
-                <hx-tab value="overview">Overview</hx-tab>
-                <hx-tab value="analytics">Analytics</hx-tab>
-                <hx-tab value="reports" disabled>Reports</hx-tab>
-                <hx-tab-panel value="overview">Overview</hx-tab-panel>
-                <hx-tab-panel value="analytics">Analytics</hx-tab-panel>
-                <hx-tab-panel value="reports">Reports</hx-tab-panel>
-            </hx-tabs>
+            <div class="grid grid-cols-[1fr_auto_1fr] gap-y-4">
+                <hx-tabs value="account">
+                    <hx-tab value="account">Account</hx-tab>
+                    <hx-tab value="password">Password</hx-tab>
+                    <hx-tab value="billing" disabled>Billing</hx-tab>
+                    <hx-tab-panel value="account">Account</hx-tab-panel>
+                    <hx-tab-panel value="password">Password</hx-tab-panel>
+                    <hx-tab-panel value="billing">Billing</hx-tab-panel>
+                </hx-tabs>
+                <hx-separator direction="vertical"></hx-separator>
+                <hx-tabs value="account" direction="vertical">
+                    <hx-tab value="account">Account</hx-tab>
+                    <hx-tab value="password">Password</hx-tab>
+                    <hx-tab value="billing" disabled>Billing</hx-tab>
+                    <hx-tab-panel value="account">Account</hx-tab-panel>
+                    <hx-tab-panel value="password">Password</hx-tab-panel>
+                    <hx-tab-panel value="billing">Billing</hx-tab-panel>
+                </hx-tabs>
+
+                <hx-tabs variant="secondary" value="overview">
+                    <hx-tab value="overview">Overview</hx-tab>
+                    <hx-tab value="analytics">Analytics</hx-tab>
+                    <hx-tab value="reports" disabled>Reports</hx-tab>
+                    <hx-tab-panel value="overview">Overview</hx-tab-panel>
+                    <hx-tab-panel value="analytics">Analytics</hx-tab-panel>
+                    <hx-tab-panel value="reports">Reports</hx-tab-panel>
+                </hx-tabs>
+                <hx-separator direction="vertical"></hx-separator>
+                <hx-tabs variant="secondary" value="overview" direction="vertical">
+                    <hx-tab value="overview">Overview</hx-tab>
+                    <hx-tab value="analytics">Analytics</hx-tab>
+                    <hx-tab value="reports" disabled>Reports</hx-tab>
+                    <hx-tab-panel value="overview">Overview</hx-tab-panel>
+                    <hx-tab-panel value="analytics">Analytics</hx-tab-panel>
+                    <hx-tab-panel value="reports">Reports</hx-tab-panel>
+                </hx-tabs>
+            </div>
         </section>
 
         <hx-separator></hx-separator>
