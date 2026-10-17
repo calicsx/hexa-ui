@@ -6,6 +6,7 @@ import "./hx-accordion-item.js";
 
 export type HxAccordionType = "single" | "multiple";
 export type HxAccordionVariant = "default" | "secondary";
+export type HxAccordionTrigger = "click" | "hover";
 
 const variants: Record<HxAccordionVariant, string> = {
     default: "",
@@ -32,11 +33,15 @@ export class HxAccordion extends HxElement {
     @property({ reflect: true }) type: HxAccordionType = "single";
     @property({ type: Boolean, reflect: true }) collapsible = false;
     @property({ reflect: true }) variant: HxAccordionVariant = "default";
+    @property({ reflect: true }) trigger: HxAccordionTrigger = "click";
 
     constructor() {
         super();
         this.addEventListener("hx-accordion-toggle", (event) => this.onToggle(event as CustomEvent<{ open: boolean }>));
         this.addEventListener("keydown", (event) => this.onKeyDown(event));
+        this.addEventListener("mouseenter", (event) => this.onHover(event, true), true);
+        this.addEventListener("mouseleave", (event) => this.onHover(event, false), true);
+        this.addEventListener("click", (event) => this.onClick(event), true);
     }
 
     private get items() {
@@ -51,6 +56,24 @@ export class HxAccordion extends HxElement {
     private itemFrom(event: Event) {
         const item = event.target as HxAccordionItem;
         return item.parentElement === this && item.tagName === "HX-ACCORDION-ITEM" ? item : null;
+    }
+
+    private onHover(event: MouseEvent, open: boolean) {
+        if (this.trigger !== "hover") return;
+        const item = this.itemFrom(event);
+        if (item && event.composedPath()[0] === item && item.open !== open) item.toggle();
+    }
+
+    private onClick(event: MouseEvent) {
+        const item = (event.target as Element).closest<HxAccordionItem>("hx-accordion-item");
+        if (
+            this.trigger === "hover" &&
+            event.detail > 0 &&
+            item?.parentElement === this &&
+            event.composedPath().includes(item.button)
+        ) {
+            event.stopPropagation();
+        }
     }
 
     private onToggle(event: CustomEvent<{ open: boolean }>) {
@@ -76,7 +99,7 @@ export class HxAccordion extends HxElement {
 
     private onKeyDown(event: KeyboardEvent) {
         const item = this.itemFrom(event);
-        if (!item || event.composedPath()[0] !== item.trigger) return;
+        if (!item || event.composedPath()[0] !== item.button) return;
         const enabled = this.items.filter((i) => !i.disabled);
         const index = enabled.indexOf(item);
         const last = enabled.length - 1;
@@ -95,6 +118,7 @@ export class HxAccordion extends HxElement {
         let found = false;
         for (const item of this.items) {
             item.variant = this.variant;
+            item.trigger = this.trigger;
             if (this.type !== "single") continue;
             if (item.open && found) item.open = false;
             found ||= item.open;

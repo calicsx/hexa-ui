@@ -3,11 +3,11 @@ import { customElement, property, query } from "lit/decorators.js";
 import { ChevronDown, type IconNode } from "lucide";
 import { HxElement } from "../../hx-element.js";
 import "../icon/hx-icon.js";
-import type { HxAccordionVariant } from "./hx-accordion.js";
+import type { HxAccordionTrigger, HxAccordionVariant } from "./hx-accordion.js";
 
-const variants: Record<HxAccordionVariant, { trigger: string; content: string; separator: string }> = {
-    default: { trigger: "px-4 hover:bg-card hover:text-card-foreground", content: "px-4", separator: "" },
-    secondary: { trigger: "px-4 hover:bg-accent", content: "px-4", separator: "mx-4" },
+const variants: Record<HxAccordionVariant, { trigger: string; hover: string; content: string; separator: string }> = {
+    default: { trigger: "px-4", hover: "hover:bg-card hover:text-card-foreground", content: "px-4", separator: "" },
+    secondary: { trigger: "px-4", hover: "hover:bg-accent", content: "px-4", separator: "mx-4" },
 };
 
 /**
@@ -50,11 +50,13 @@ export class HxAccordionItem extends HxElement {
     @property({ type: Boolean, reflect: true }) open = false;
     @property({ type: Boolean, reflect: true }) disabled = false;
     @property({ reflect: true }) variant: HxAccordionVariant = "default";
+    @property({ reflect: true }) trigger: HxAccordionTrigger = "click";
     @property({ attribute: false }) icon?: IconNode;
 
-    @query("button") trigger!: HTMLButtonElement;
+    @query("button") button!: HTMLButtonElement;
 
-    private toggle() {
+    toggle() {
+        if (this.disabled) return;
         const open = !this.open;
         const event = new CustomEvent("hx-accordion-toggle", {
             detail: { open },
@@ -76,7 +78,9 @@ export class HxAccordionItem extends HxElement {
                     aria-expanded=${this.open}
                     aria-controls="content"
                     ?disabled=${this.disabled}
-                    class="${variant.trigger} focus-visible:ring-ring/50 flex flex-1 cursor-pointer items-start justify-between gap-4 py-3 text-left text-sm font-medium transition-all outline-none focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50"
+                    class="${variant.trigger} ${
+                        this.trigger === "click" ? `${variant.hover} cursor-pointer` : ""
+                    } focus-visible:ring-ring/50 flex flex-1 items-start justify-between gap-4 py-3 text-left text-sm font-medium transition-all outline-none focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50"
                     @click=${this.toggle}
                 >
                     <span class="flex items-start gap-2">
