@@ -1,5 +1,5 @@
 import { css, html } from "lit";
-import { customElement, property } from "lit/decorators.js";
+import { customElement, property, query } from "lit/decorators.js";
 import { HxElement } from "../../hx-element.js";
 
 export type HxButtonVariant = "primary" | "secondary" | "outline" | "ghost" | "destructive";
@@ -32,6 +32,8 @@ const squareSizes: Record<HxButtonSize, string> = {
  * @element hx-button
  * @slot - The button label (text, icon…).
  * @csspart base - The inner `<button>` element.
+ *
+ * `focusTarget` is the inner `<button>`, which receives the focus (used by `hx-tooltip` to describe it).
  */
 @customElement("hx-button")
 export class HxButton extends HxElement {
@@ -51,6 +53,8 @@ export class HxButton extends HxElement {
     @property() type: "button" | "submit" | "reset" = "button";
     @property({ type: Boolean, reflect: true }) disabled = false;
     @property({ type: Boolean, reflect: true }) square = false;
+
+    @query("button") focusTarget!: HTMLButtonElement;
 
     private internals = this.attachInternals();
 

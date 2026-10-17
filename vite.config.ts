@@ -22,12 +22,13 @@ export default defineConfig({
                 tabs: "src/components/tabs/index.ts",
                 separator: "src/components/separator/index.ts",
                 accordion: "src/components/accordion/index.ts",
+                tooltip: "src/components/tooltip/index.ts",
             },
             formats: ["es"],
             fileName: (_format, name) => `${name}.js`,
         },
         rollupOptions: {
-            external: [/^lit(\/.*)?$/, /^lucide(\/.*)?$/],
+            external: [/^lit(\/.*)?$/, /^lucide(\/.*)?$/, /^@floating-ui\//],
         },
     },
 });

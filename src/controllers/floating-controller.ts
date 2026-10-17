@@ -1,0 +1,76 @@
+import { arrow, autoUpdate, computePosition, flip, offset, shift, type Placement } from "@floating-ui/dom";
+import type { ReactiveController, ReactiveControllerHost } from "lit";
+
+export interface FloatingOptions {
+    anchor: Element;
+    floating: HTMLElement;
+    placement: Placement;
+    distance: number;
+    arrow?: HTMLElement;
+}
+
+type Side = "top" | "right" | "bottom" | "left";
+
+const opposite: Record<Side, Side> = { top: "bottom", right: "left", bottom: "top", left: "right" };
+
+/**
+ * Positions a floating element (a `[popover]` in the top layer) next to its anchor with Floating UI,
+ * and keeps it there while the page scrolls or resizes. Sets `data-side` and `data-align` on the
+ * floating element so the CSS can animate it from the right direction.
+ */
+export class FloatingController implements ReactiveController {
+    private options: () => FloatingOptions | undefined;
+    private cleanup?: () => void;
+
+    constructor(host: ReactiveControllerHost, options: () => FloatingOptions | undefined) {
+        this.options = options;
+        host.addController(this);
+    }
+
+    start() {
+        this.stop();
+        const options = this.options();
+        if (options) this.cleanup = autoUpdate(options.anchor, options.floating, () => this.position(options));
+    }
+
+    stop() {
+        this.cleanup?.();
+        this.cleanup = undefined;
+    }
+
+    hostDisconnected() {
+        this.stop();
+    }
+
+    private async position({ anchor, floating, placement, distance, arrow: arrowElement }: FloatingOptions) {
+        const result = await computePosition(anchor, floating, {
+            strategy: "fixed",
+            placement,
+            middleware: [
+                offset(distance),
+                flip(),
+                shift({ padding: 8 }),
+                arrowElement && arrow({ element: arrowElement, padding: 8 }),
+            ],
+        });
+        const [side, align = "center"] = result.placement.split("-") as [Side, string?];
+        Object.assign(floating.style, {
+            left: `${result.x}px`,
+            top: `${result.y}px`,
+            transformOrigin: opposite[side],
+        });
+        floating.dataset.side = side;
+        floating.dataset.align = align;
+
+        const coords = result.middlewareData.arrow;
+        if (arrowElement && coords) {
+            Object.assign(arrowElement.style, {
+                left: coords.x != null ? `${coords.x}px` : "",
+                top: coords.y != null ? `${coords.y}px` : "",
+                right: "",
+                bottom: "",
+                [opposite[side]]: `${-arrowElement.offsetWidth / 2}px`,
+            });
+        }
+    }
+}

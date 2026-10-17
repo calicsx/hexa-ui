@@ -13,3 +13,4 @@ export * from "./components/skeleton/index.js";
 export * from "./components/tabs/index.js";
 export * from "./components/separator/index.js";
 export * from "./components/accordion/index.js";
+export * from "./components/tooltip/index.js";

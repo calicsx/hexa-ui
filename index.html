@@ -227,6 +227,29 @@
         <hx-separator></hx-separator>
 
         <section>
+            <h2 class="text-muted-foreground mb-3 text-sm font-semibold tracking-wide uppercase">Tooltip</h2>
+            <div class="flex flex-wrap items-center gap-3">
+                <hx-tooltip content="Default">
+                    <hx-button variant="outline">Hover me</hx-button>
+                </hx-tooltip>
+                <hx-tooltip content="Bottom" placement="bottom">
+                    <hx-button variant="outline">Bottom</hx-button>
+                </hx-tooltip>
+                <hx-tooltip content="Left" placement="left">
+                    <hx-button variant="outline">Left</hx-button>
+                </hx-tooltip>
+                <hx-tooltip content="Right" placement="right">
+                    <hx-button variant="outline">Right</hx-button>
+                </hx-tooltip>
+                <hx-tooltip content="No arrow" without-arrow>
+                    <hx-button variant="outline">Without arrow</hx-button>
+                </hx-tooltip>
+            </div>
+        </section>
+
+        <hx-separator></hx-separator>
+
+        <section>
             <h2 class="text-muted-foreground mb-3 text-sm font-semibold tracking-wide uppercase">Accordion</h2>
             <hx-accordion collapsible>
                 <hx-accordion-item value="shipping">
