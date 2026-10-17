@@ -1,13 +1,13 @@
 import type { Placement } from "@floating-ui/dom";
-import { css, html, nothing, type PropertyValues, type ReactiveElement } from "lit";
+import { css, html, nothing, type PropertyValues } from "lit";
 import { customElement, property, query } from "lit/decorators.js";
 import { FloatingController } from "../../controllers/floating-controller.js";
+import { focusTargetOf } from "../../focus-target.js";
 import { HxElement } from "../../hx-element.js";
 import { HxOverlayElement } from "../../hx-overlay-element.js";
 
 export type HxTooltipPlacement = Placement;
 
-/* Once a tooltip has closed, the next one opens without delay for this long (moving along a toolbar). */
 const skipDelay = 300;
 let lastClosed = 0;
 
@@ -21,6 +21,10 @@ let lastClosed = 0;
  * @fires hx-after-hide - The tooltip is closed and its exit animation finished.
  * @csspart popup - The tooltip bubble.
  * @csspart arrow - The arrow pointing to the trigger (not rendered with `without-arrow`).
+ *
+ * Opens on hover (after `open-delay`) and on keyboard focus; closes on pointer leave, blur, click and
+ * Escape. The text is exposed as the trigger's `aria-description`; on `hx-*` components that delegate
+ * focus, it goes on their `focusTarget` (the inner element that actually receives focus).
  */
 @customElement("hx-tooltip")
 export class HxTooltip extends HxOverlayElement {
@@ -118,9 +122,8 @@ export class HxTooltip extends HxOverlayElement {
 
     private async describe() {
         const trigger = this.trigger;
-        await (trigger as Partial<ReactiveElement> | undefined)?.updateComplete;
+        const target = trigger && (await focusTargetOf(trigger));
         if (trigger !== this.trigger) return;
-        const target = (trigger as { focusTarget?: HTMLElement } | undefined)?.focusTarget ?? trigger;
         if (target !== this.described) this.described?.removeAttribute("aria-description");
         this.described = target;
 

@@ -74,6 +74,14 @@
         "./tooltip": {
             "types": "./dist/components/tooltip/index.d.ts",
             "import": "./dist/tooltip.js"
+        },
+        "./menu": {
+            "types": "./dist/components/menu/index.d.ts",
+            "import": "./dist/menu.js"
+        },
+        "./dropdown-menu": {
+            "types": "./dist/components/dropdown-menu/index.d.ts",
+            "import": "./dist/dropdown-menu.js"
         }
     },
     "scripts": {

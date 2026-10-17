@@ -48,7 +48,6 @@ export class HxAccordion extends HxElement {
         return [...this.querySelectorAll<HxAccordionItem>(":scope > hx-accordion-item")];
     }
 
-    /** The values of the open items. */
     get value() {
         return this.items.filter((item) => item.open).map((item) => item.value);
     }

@@ -227,29 +227,6 @@
         <hx-separator></hx-separator>
 
         <section>
-            <h2 class="text-muted-foreground mb-3 text-sm font-semibold tracking-wide uppercase">Tooltip</h2>
-            <div class="flex flex-wrap items-center gap-3">
-                <hx-tooltip content="Default">
-                    <hx-button variant="outline">Hover me</hx-button>
-                </hx-tooltip>
-                <hx-tooltip content="Bottom" placement="bottom">
-                    <hx-button variant="outline">Bottom</hx-button>
-                </hx-tooltip>
-                <hx-tooltip content="Left" placement="left">
-                    <hx-button variant="outline">Left</hx-button>
-                </hx-tooltip>
-                <hx-tooltip content="Right" placement="right">
-                    <hx-button variant="outline">Right</hx-button>
-                </hx-tooltip>
-                <hx-tooltip content="No arrow" without-arrow>
-                    <hx-button variant="outline">Without arrow</hx-button>
-                </hx-tooltip>
-            </div>
-        </section>
-
-        <hx-separator></hx-separator>
-
-        <section>
             <h2 class="text-muted-foreground mb-3 text-sm font-semibold tracking-wide uppercase">Accordion</h2>
             <hx-accordion collapsible>
                 <hx-accordion-item value="shipping">
@@ -293,6 +270,90 @@
                     Reach us by email or chat, 24/7.
                 </hx-accordion-item>
             </hx-accordion>
+        </section>
+
+        <hx-separator></hx-separator>
+
+        <section>
+            <h2 class="text-muted-foreground mb-3 text-sm font-semibold tracking-wide uppercase">Tooltip</h2>
+            <div class="flex flex-wrap items-center gap-3">
+                <hx-tooltip content="Default">
+                    <hx-button variant="outline">Hover me</hx-button>
+                </hx-tooltip>
+                <hx-tooltip content="Bottom" placement="bottom">
+                    <hx-button variant="outline">Bottom</hx-button>
+                </hx-tooltip>
+                <hx-tooltip content="Left" placement="left">
+                    <hx-button variant="outline">Left</hx-button>
+                </hx-tooltip>
+                <hx-tooltip content="Right" placement="right">
+                    <hx-button variant="outline">Right</hx-button>
+                </hx-tooltip>
+                <hx-tooltip content="No arrow" without-arrow>
+                    <hx-button variant="outline">Without arrow</hx-button>
+                </hx-tooltip>
+            </div>
+        </section>
+
+        <hx-separator></hx-separator>
+
+        <section>
+            <h2 class="text-muted-foreground mb-3 text-sm font-semibold tracking-wide uppercase">Dropdown menu</h2>
+            <div class="flex flex-wrap items-center gap-3">
+                <hx-dropdown-menu>
+                    <hx-button slot="trigger" variant="outline">Menu</hx-button>
+                    <hx-menu-group label="Account">
+                        <hx-menu-item value="profile" data-icon="User">Profile</hx-menu-item>
+                        <hx-menu-item value="billing" data-icon="CreditCard" disabled>Billing</hx-menu-item>
+                        <hx-menu-item value="settings" data-icon="Settings">Settings</hx-menu-item>
+                    </hx-menu-group>
+                    <hx-separator></hx-separator>
+                    <hx-menu-item value="delete" variant="destructive" data-icon="Trash2">Delete</hx-menu-item>
+                </hx-dropdown-menu>
+
+                <hx-dropdown-menu>
+                    <hx-button slot="trigger" variant="outline">Checkboxes</hx-button>
+                    <hx-menu-item type="checkbox" value="status-bar" checked>Show status bar</hx-menu-item>
+                    <hx-menu-item type="checkbox" value="activity-bar">Show activity bar</hx-menu-item>
+                    <hx-menu-item type="checkbox" value="panel" disabled>Show panel</hx-menu-item>
+                </hx-dropdown-menu>
+
+                <hx-dropdown-menu>
+                    <hx-button slot="trigger" variant="outline">Radio group</hx-button>
+                    <hx-menu-group label="Panel position">
+                        <hx-menu-item type="radio" value="top" checked>Top</hx-menu-item>
+                        <hx-menu-item type="radio" value="bottom">Bottom</hx-menu-item>
+                        <hx-menu-item type="radio" value="right">Right</hx-menu-item>
+                    </hx-menu-group>
+                </hx-dropdown-menu>
+
+                <hx-dropdown-menu>
+                    <hx-button slot="trigger" variant="outline">Submenus</hx-button>
+                    <hx-menu-item value="new">New file</hx-menu-item>
+                    <hx-menu-item>
+                        Share
+                        <hx-menu slot="submenu">
+                            <hx-menu-item value="email">Email</hx-menu-item>
+                            <hx-menu-item value="message">Message</hx-menu-item>
+                            <hx-separator></hx-separator>
+                            <hx-menu-item>
+                                More
+                                <hx-menu slot="submenu">
+                                    <hx-menu-item value="link">Copy link</hx-menu-item>
+                                    <hx-menu-item value="embed">Embed</hx-menu-item>
+                                </hx-menu>
+                            </hx-menu-item>
+                        </hx-menu>
+                    </hx-menu-item>
+                    <hx-menu-item value="download" data-icon="Download">Download</hx-menu-item>
+                </hx-dropdown-menu>
+
+                <hx-dropdown-menu placement="top-start">
+                    <hx-button slot="trigger" variant="outline">Top</hx-button>
+                    <hx-menu-item value="profile">Profile</hx-menu-item>
+                    <hx-menu-item value="settings">Settings</hx-menu-item>
+                </hx-dropdown-menu>
+            </div>
         </section>
 
         <hx-separator></hx-separator>

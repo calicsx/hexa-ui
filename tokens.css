@@ -49,4 +49,8 @@
         margin-block: 0;
         margin-inline: 1rem;
     }
+    :where(hx-menu, hx-dropdown-menu) > hx-separator {
+        width: auto;
+        margin: 0.25rem -0.25rem;
+    }
 }

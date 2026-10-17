@@ -61,7 +61,6 @@ export abstract class HxCheckableElement extends HxElement {
         this.dispatchEvent(new Event("change", { bubbles: true, composed: true }));
     }
 
-    /** Value exposed as `aria-checked`; the checkbox overrides it for the indeterminate state. */
     protected get checkedState(): "true" | "false" | "mixed" {
         return this.checked ? "true" : "false";
     }

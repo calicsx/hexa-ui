@@ -1,4 +1,4 @@
-import { arrow, autoUpdate, computePosition, flip, offset, shift, type Placement } from "@floating-ui/dom";
+import { arrow, autoUpdate, computePosition, flip, offset, shift, size, type Placement } from "@floating-ui/dom";
 import type { ReactiveController, ReactiveControllerHost } from "lit";
 
 export interface FloatingOptions {
@@ -6,6 +6,8 @@ export interface FloatingOptions {
     floating: HTMLElement;
     placement: Placement;
     distance: number;
+    alignOffset?: number;
+    fit?: boolean;
     arrow?: HTMLElement;
 }
 
@@ -42,14 +44,22 @@ export class FloatingController implements ReactiveController {
         this.stop();
     }
 
-    private async position({ anchor, floating, placement, distance, arrow: arrowElement }: FloatingOptions) {
+    private async position(options: FloatingOptions) {
+        const { anchor, floating, placement, distance, alignOffset, fit, arrow: arrowElement } = options;
         const result = await computePosition(anchor, floating, {
             strategy: "fixed",
             placement,
             middleware: [
-                offset(distance),
+                offset({ mainAxis: distance, alignmentAxis: alignOffset }),
                 flip(),
                 shift({ padding: 8 }),
+                fit &&
+                    size({
+                        padding: 8,
+                        apply: ({ availableHeight }) => {
+                            floating.style.maxHeight = `${Math.max(0, availableHeight)}px`;
+                        },
+                    }),
                 arrowElement && arrow({ element: arrowElement, padding: 8 }),
             ],
         });
