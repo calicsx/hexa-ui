@@ -21,6 +21,7 @@ export default defineConfig({
                 skeleton: "src/components/skeleton/index.ts",
                 tabs: "src/components/tabs/index.ts",
                 separator: "src/components/separator/index.ts",
+                accordion: "src/components/accordion/index.ts",
             },
             formats: ["es"],
             fileName: (_format, name) => `${name}.js`,

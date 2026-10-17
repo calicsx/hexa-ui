@@ -66,6 +66,10 @@
         "./separator": {
             "types": "./dist/components/separator/index.d.ts",
             "import": "./dist/separator.js"
+        },
+        "./accordion": {
+            "types": "./dist/components/accordion/index.d.ts",
+            "import": "./dist/accordion.js"
         }
     },
     "scripts": {

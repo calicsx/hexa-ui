@@ -227,6 +227,54 @@
         <hx-separator></hx-separator>
 
         <section>
+            <h2 class="text-muted-foreground mb-3 text-sm font-semibold tracking-wide uppercase">Accordion</h2>
+            <hx-accordion collapsible>
+                <hx-accordion-item value="shipping">
+                    <span slot="title">What are your shipping options?</span>
+                    We offer standard (5-7 days), express (2-3 days) and overnight shipping.
+                </hx-accordion-item>
+                <hx-accordion-item value="returns">
+                    <span slot="title">What is your return policy?</span>
+                    Returns are accepted within 30 days of purchase, in their original packaging.
+                </hx-accordion-item>
+                <hx-accordion-item value="support" disabled>
+                    <span slot="title">How can I contact support?</span>
+                    Reach us by email or chat, 24/7.
+                </hx-accordion-item>
+            </hx-accordion>
+            <hx-accordion collapsible variant="secondary" class="mt-4">
+                <hx-accordion-item value="shipping">
+                    <span slot="title">What are your shipping options?</span>
+                    We offer standard (5-7 days), express (2-3 days) and overnight shipping.
+                </hx-accordion-item>
+                <hx-accordion-item value="returns">
+                    <span slot="title">What is your return policy?</span>
+                    Returns are accepted within 30 days of purchase, in their original packaging.
+                </hx-accordion-item>
+                <hx-accordion-item value="support" disabled>
+                    <span slot="title">How can I contact support?</span>
+                    Reach us by email or chat, 24/7.
+                </hx-accordion-item>
+            </hx-accordion>
+            <hx-accordion collapsible class="mt-4">
+                <hx-accordion-item value="shipping" data-icon="Package">
+                    <span slot="title">What are your shipping options?</span>
+                    We offer standard (5-7 days), express (2-3 days) and overnight shipping.
+                </hx-accordion-item>
+                <hx-accordion-item value="returns" data-icon="Undo2">
+                    <span slot="title">What is your return policy?</span>
+                    Returns are accepted within 30 days of purchase, in their original packaging.
+                </hx-accordion-item>
+                <hx-accordion-item value="support" disabled data-icon="Headset">
+                    <span slot="title">How can I contact support?</span>
+                    Reach us by email or chat, 24/7.
+                </hx-accordion-item>
+            </hx-accordion>
+        </section>
+
+        <hx-separator></hx-separator>
+
+        <section>
             <h2 class="text-muted-foreground mb-3 text-sm font-semibold tracking-wide uppercase">Skeleton</h2>
             <div class="flex w-full items-center gap-4">
                 <hx-skeleton circle class="size-12"></hx-skeleton>
@@ -241,20 +289,23 @@
         <script type="module" src="/src/index.ts"></script>
         <script type="module">
             // Demo only: in an app, import each icon and bind it with `.icon=${Search}`.
-            // `[data-icon]` covers every component with an `icon` property (hx-icon, hx-badge, hx-tab…).
+            // `[data-icon]` covers every component with an `icon` property (hx-icon, hx-badge, hx-tab, hx-accordion-item…).
             import {
                 ChartLine,
                 CircleAlert,
                 CreditCard,
                 Download,
                 FileText,
+                Headset,
                 Heart,
                 House,
                 Lock,
+                Package,
                 Plus,
                 Search,
                 Settings,
                 Trash2,
+                Undo2,
                 User,
             } from "lucide";
             const icons = {
@@ -263,13 +314,16 @@
                 CreditCard,
                 Download,
                 FileText,
+                Headset,
                 Heart,
                 House,
                 Lock,
+                Package,
                 Plus,
                 Search,
                 Settings,
                 Trash2,
+                Undo2,
                 User,
             };
             for (const el of document.querySelectorAll("[data-icon]")) el.icon = icons[el.dataset.icon];

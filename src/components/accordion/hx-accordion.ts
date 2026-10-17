@@ -1,0 +1,117 @@
+import { css, html } from "lit";
+import { customElement, property } from "lit/decorators.js";
+import { HxElement } from "../../hx-element.js";
+import type { HxAccordionItem } from "./hx-accordion-item.js";
+import "./hx-accordion-item.js";
+
+export type HxAccordionType = "single" | "multiple";
+export type HxAccordionVariant = "default" | "secondary";
+
+const variants: Record<HxAccordionVariant, string> = {
+    default: "",
+    secondary: "overflow-hidden rounded-lg bg-secondary",
+};
+
+/**
+ * @element hx-accordion
+ * @slot - The `hx-accordion-item` elements.
+ * @fires hx-accordion-change - The open items changed; `event.detail.value` lists their values.
+ * @csspart base - The items wrapper.
+ */
+@customElement("hx-accordion")
+export class HxAccordion extends HxElement {
+    static override styles = [
+        HxElement.styles,
+        css`
+            :host {
+                display: block;
+            }
+        `,
+    ];
+
+    @property({ reflect: true }) type: HxAccordionType = "single";
+    @property({ type: Boolean, reflect: true }) collapsible = false;
+    @property({ reflect: true }) variant: HxAccordionVariant = "default";
+
+    constructor() {
+        super();
+        this.addEventListener("hx-accordion-toggle", (event) => this.onToggle(event as CustomEvent<{ open: boolean }>));
+        this.addEventListener("keydown", (event) => this.onKeyDown(event));
+    }
+
+    private get items() {
+        return [...this.querySelectorAll<HxAccordionItem>(":scope > hx-accordion-item")];
+    }
+
+    /** The values of the open items. */
+    get value() {
+        return this.items.filter((item) => item.open).map((item) => item.value);
+    }
+
+    private itemFrom(event: Event) {
+        const item = event.target as HxAccordionItem;
+        return item.parentElement === this && item.tagName === "HX-ACCORDION-ITEM" ? item : null;
+    }
+
+    private onToggle(event: CustomEvent<{ open: boolean }>) {
+        const item = this.itemFrom(event);
+        if (!item) return;
+        if (this.type === "single") {
+            if (!event.detail.open && !this.collapsible) {
+                event.preventDefault();
+                return;
+            }
+            if (event.detail.open) for (const other of this.items) if (other !== item) other.open = false;
+        }
+        queueMicrotask(() =>
+            this.dispatchEvent(
+                new CustomEvent("hx-accordion-change", {
+                    detail: { value: this.value },
+                    bubbles: true,
+                    composed: true,
+                }),
+            ),
+        );
+    }
+
+    private onKeyDown(event: KeyboardEvent) {
+        const item = this.itemFrom(event);
+        if (!item || event.composedPath()[0] !== item.trigger) return;
+        const enabled = this.items.filter((i) => !i.disabled);
+        const index = enabled.indexOf(item);
+        const last = enabled.length - 1;
+        const next: HxAccordionItem | undefined = {
+            ArrowDown: enabled[index === last ? 0 : index + 1],
+            ArrowUp: enabled[index === 0 ? last : index - 1],
+            Home: enabled[0],
+            End: enabled[last],
+        }[event.key];
+        if (!next) return;
+        event.preventDefault();
+        next.focus();
+    }
+
+    private sync() {
+        let found = false;
+        for (const item of this.items) {
+            item.variant = this.variant;
+            if (this.type !== "single") continue;
+            if (item.open && found) item.open = false;
+            found ||= item.open;
+        }
+    }
+
+    protected override updated() {
+        this.sync();
+    }
+
+    override render() {
+        return html`<div part="base" class=${variants[this.variant]}><slot @slotchange=${this.sync}></slot></div>`;
+    }
+}
+
+declare global {
+    interface HTMLElementTagNameMap {
+        "hx-accordion": HxAccordion;
+    }
+}
